@@ -1,3 +1,3 @@
 <?php
-header("Location: /modules/home/");
+header("Location: /modules/");
 ?>
