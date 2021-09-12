@@ -6,7 +6,7 @@ conda init
 /usr/sbin/nginx -g "daemon off;" &
 mkdir -p /run/
 mkdir -p /run/php/
-php-fpm7.3 -R -F &
+php-fpm7.4 -R -F &
 
 # Rstudio server
 rstudio-server start
