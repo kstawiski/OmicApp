@@ -2,6 +2,20 @@
 conda init
 . ~/.bashrc
 
+# init for persistent
+if [ -d "/home/app" ]
+then
+	if [ "$(ls -A /home/app)" ]; then
+     echo "Using persistent data application from /home/app directory."
+	else
+    echo "Persistent data directory is empty. Initializing app..."
+    
+	fi
+else
+	echo "Directory /home/app not found."
+fi
+
+
 # nignx+php
 /usr/sbin/nginx -g "daemon off;" &
 mkdir -p /run/

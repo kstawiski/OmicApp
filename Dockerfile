@@ -12,8 +12,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 ENV SHELL /bin/bash
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
-RUN rm Miniconda3-latest-Linux-x86_64.sh &&\
+    /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && rm Miniconda3-latest-Linux-x86_64.sh && \
     /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
@@ -33,11 +32,7 @@ COPY setup/keras.R /
 COPY setup/setup.R /
 
 RUN Rscript -e "chooseCRANmirror(ind=1);" && Rscript /setup.R
-RUN useradd -m app && echo 'app:OmicSelector' | chpasswd
-RUN adduser app sudo && mkdir /home/app/www/ && chown app:app -R /home/app/www/ && mkdir /home/app/modules/ && chown app:app -R /home/app/modules/ && mkdir /home/app/logs/ && chown app:app -R /home/app/logs/ && echo 'export PATH="/opt/conda/bin:$PATH"' >> /home/app/.bashrc
-
-# Setup keras in R env
-RUN Rscript /keras.R && Rscript -e "library(OmicSelector);"
+RUN useradd -m app && echo 'app:OmicSelector' | chpasswd && adduser app sudo && mkdir /home/app/www/ && chown app:app -R /home/app/www/ && mkdir /home/app/modules/ && chown app:app -R /home/app/modules/ && mkdir /home/app/logs/ && chown app:app -R /home/app/logs/ && echo 'export PATH="/opt/conda/bin:$PATH"' >> /home/app/.bashrc && Rscript /keras.R && Rscript -e "library(OmicSelector);"
 
 # Build
 COPY setup/entrypoint.sh /entrypoint.sh
