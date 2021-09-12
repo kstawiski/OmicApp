@@ -32,7 +32,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
 COPY setup/keras.R /
 COPY setup/setup.R /
 
-RUN Rscript -e "chooseCRANmirror(ind=1);" && Rscript /setup.R && echo 'root:biostat' | chpasswd 
+RUN Rscript -e "chooseCRANmirror(ind=1);" && Rscript /setup.R
 RUN useradd -m app && echo 'app:OmicSelector' | chpasswd
 RUN adduser app sudo && mkdir /home/app/www/ && chown app:app -R /home/app/www/ && mkdir /home/app/modules/ && chown app:app -R /home/app/modules/ && mkdir /home/app/logs/ && chown app:app -R /home/app/logs/ && echo 'export PATH="/opt/conda/bin:$PATH"' >> /home/app/.bashrc
 
