@@ -1,4 +1,4 @@
-FROM nvidia/cuda
+FROM nvidia/cuda:11.4.1-cudnn8-runtime-ubuntu20.04
 ENV PUBLIC=0
 
 # Basic build setup
@@ -52,7 +52,6 @@ RUN apt-get install -y libclang-dev && wget https://www.rstudio.org/download/lat
 # Shiny server:
 RUN wget --no-verbose https://download3.rstudio.org/ubuntu-14.04/x86_64/VERSION -O "version.txt" && VERSION=$(cat version.txt)  && wget --no-verbose "https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-$VERSION-amd64.deb" -O ss-latest.deb && gdebi -n ss-latest.deb && rm -f version.txt ss-latest.deb
 COPY setup/shiny-server.conf /etc/shiny-server/shiny-server.conf 
-RUN Rscript -e 'install.packages(c("shiny","rmarkdown","shinydashboard"))'
 
 ADD modules /home/app/modules/
 COPY setup/index.php /home/app/www/index.php

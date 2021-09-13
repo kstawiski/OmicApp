@@ -6,8 +6,16 @@ To do.
 
 ## Running application
 
+GPU:
+
 ```
-docker run -d --name testapp --restart always -p 23424:80 -v /home/konrad/temp/testapp/:/home/app/ kstawiski/omicapp
+docker run -d --name testapp --gpus all --restart always -p 23424:80 -v /home/konrad/temp/testapp/:/home/app/ kstawiski/omicapp
+```
+
+CPU:
+
+```
+docker run -d --name testapp --restart always -p 23424:80 -v /home/konrad/temp/testapp/:/home/app/ kstawiski/omicapp-cpu
 ```
 
 - `/home/konrad/temp/testapp/` - local directory where data is kept (persistance)
