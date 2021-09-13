@@ -37,9 +37,9 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
         with:
-          image: kstawiski/omicapp
+          image: kstawiski/omicapp-cpu
           tag: latest
           registry: docker.io
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile.cpu
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
